@@ -1,44 +1,63 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from "@angular/fire/auth";
-
-import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
-providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class AuthenticationService {
-userData: Observable<firebase.User>;
+  isLoggedIn = false;
+  errorMessage: string ;
+  userData: Observable<firebase.User>;
 
-constructor(private angularFireAuth: AngularFireAuth) {
-this.userData = angularFireAuth.authState;
-}
+  constructor(private angularFireAuth: AngularFireAuth) {
+    this.userData = angularFireAuth.authState;
+  }
 
-/* Sign up */
-SignUp(email: string, password: string) {
-this.angularFireAuth.createUserWithEmailAndPassword(email, password)
-.then(res => {
-console.log('You are Successfully signed up!', res);
-})
-.catch(error => {
-console.log('Something is wrong:', error.message);
-});
-}
+  /* Sign up */
+  async SignUp(email: string, password: string) {
+   await this.angularFireAuth.createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        this.isLoggedIn = true;
+        localStorage.setItem('user', JSON.stringify(res.user));
+        console.log('You are Successfully signed up!');
+      })
+      .catch(error => {
+        this.isLoggedIn = false;
+        this.setErrorMessage(error.message);
+        console.log('Something is wrong:', error.message);
+      });
+  }
 
-/* Sign in */
-SignIn(email: string, password: string) {
-this.angularFireAuth.signInWithEmailAndPassword(email, password)
-.then(res => {
-console.log('You are Successfully logged in!');
-})
-.catch(err => {
-console.log('Something is wrong:',err.message);
-});
-}
+  /* Sign in */
+ async SignIn(email: string, password: string) {
+  await  this.angularFireAuth.signInWithEmailAndPassword(email, password)
+      .then(res => {
+        this.isLoggedIn = true;
+        alert('-true-');
+        localStorage.setItem('user', JSON.stringify(res.user));
+      })
+      .catch(error => {
+        this.isLoggedIn = false;
+        this.setErrorMessage(error.message);
+        console.log('Something is wrong:', error.message);
+      });
+  }
 
-/* Sign out */
-SignOut() {
-this.angularFireAuth.signOut();
-}
+  /* Sign out */
+  SignOut() {
+    this.angularFireAuth.signOut();
+  }
+
+  setErrorMessage(val: string ) {
+    console.log('val: ', val);
+    this.errorMessage = val;
+  }
+
+  getErrorMessage(): string {
+    console.log(this.errorMessage);
+    return this.errorMessage;
+  }
 
 }
