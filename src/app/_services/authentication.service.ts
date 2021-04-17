@@ -8,16 +8,16 @@ import { Observable, Subject } from 'rxjs';
 
 export class AuthenticationService {
   isLoggedIn = false;
-  errorMessage: string ;
- // userData: Observable<firebase.loginassessment>;
+  errorMessage: string;
+  // userData: Observable<firebase.loginassessment>;
 
   constructor(private angularFireAuth: AngularFireAuth) {
-  //  this.userData = angularFireAuth.authState;
+    //  this.userData = angularFireAuth.authState;
   }
 
   /* Sign up */
   async SignUp(email: string, password: string) {
-   await this.angularFireAuth.createUserWithEmailAndPassword(email, password)
+    await this.angularFireAuth.createUserWithEmailAndPassword(email, password)
       .then(res => {
         this.isLoggedIn = true;
         localStorage.setItem('user', JSON.stringify(res.user));
@@ -31,8 +31,8 @@ export class AuthenticationService {
   }
 
   /* Sign in */
- async SignIn(email: string, password: string) {
-  await  this.angularFireAuth.signInWithEmailAndPassword(email, password)
+  async SignIn(email: string, password: string) {
+    await this.angularFireAuth.signInWithEmailAndPassword(email, password)
       .then(res => {
         this.isLoggedIn = true;
         localStorage.setItem('user', JSON.stringify(res.user));
@@ -46,11 +46,25 @@ export class AuthenticationService {
 
   /* Sign out */
   SignOut() {
+    alert('signout servie');
     this.angularFireAuth.signOut();
     localStorage.removeItem('user');
   }
 
-  setErrorMessage(val: string ) {
+  forgottPassword(email) {
+
+    this.angularFireAuth.sendPasswordResetEmail(email).then(
+      () => {
+        // success, show some message
+        console.log('password reset successfully');
+      },
+      err => {
+        console.log('password: ', err);
+      }
+    );
+  }
+
+  setErrorMessage(val: string) {
     console.log('val: ', val);
     this.errorMessage = val;
   }

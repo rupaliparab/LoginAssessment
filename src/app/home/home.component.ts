@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   password: string;
   title = 'LoginAssessment';
   isSignedIn = false;
+  enableForgotPassword = false;
   errorMessage: string;
 
   constructor(
@@ -42,9 +43,9 @@ export class HomeComponent implements OnInit {
     if (this.authenticationService.isLoggedIn) {
       this.isSignedIn = true;
       this.router.navigate(['/login']);
-      } else {
-       this.showMessage();
-      }
+    } else {
+      this.showMessage();
+    }
     this.email = '';
     this.password = '';
   }
@@ -53,6 +54,16 @@ export class HomeComponent implements OnInit {
     alert('signout home');
     this.authenticationService.SignOut();
     this.isSignedIn = false;
+  }
+
+  forgotPasswordLink() {
+    this.enableForgotPassword = true;
+  }
+
+  forgotPassword(email) {
+
+    this.authenticationService.forgottPassword(email);
+    this.enableForgotPassword = false;
   }
   showMessage() {
     this.errorMessage = this.authenticationService.getErrorMessage();

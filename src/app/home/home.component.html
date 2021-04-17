@@ -1,22 +1,26 @@
 <div class="jumbotron">
   <div class="container">
-      <div class="row">
-          <div class="col-sm-6 offset-sm-3">
-   <div *ngIf="!(authenticationService.userData | async)">
-  <div class="form-group">
-  <label for="email">Email address:</label>
-  <input type="text" class="form-control" [(ngModel)]="email" placeholder="email">
-  </div>
-  <div class="form-group">
-  <label for="pwd">Password:</label>
-  <input type="password" class="form-control" [(ngModel)]="password" id="pwd" placeholder="password">
-  </div>
-  <div class="text-danger">{{errorMessage}}</div>
-  <button (click)="signUp()" class="btn btn-default">Sign Up</button>
-  <button (click)="signIn()" class="btn btn-default" style="margin-left:5px;">Login</button>
+    <div class="row">
+      <div class="col-sm-6 offset-sm-3">
+        <div *ngIf="!(authenticationService.userData | async)">
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="text" class="form-control" [(ngModel)]="email" placeholder="email">
+          </div>
+          <div class="form-group" *ngIf="!enableForgotPassword">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" [(ngModel)]="password" id="pwd" placeholder="password">
+          </div>
+          <div class="text-danger">{{errorMessage}}</div>
+          <!-- <button *ngIf="!enableForgotPassword" (click)="signUp()" class="btn btn-default">Sign Up</button> -->
+          <button *ngIf="!enableForgotPassword" (click)="signIn()" class="btn btn-default"
+            style="margin-left:5px;">Login</button>
+          <button *ngIf="enableForgotPassword" (click)="forgotPassword(email)" class="btn btn-default"
+            style="margin-left:5px;">Login</button>
+          <a *ngIf="!enableForgotPassword" (click)="forgotPasswordLink()">forgot password</a>
 
-  </div>
-   </div>
+        </div>
+      </div>
     </div>
     <!-- <app-login *ngIf="!isSignedIn" (isLoggOut)="signOut()"></app-login> -->
   </div>
