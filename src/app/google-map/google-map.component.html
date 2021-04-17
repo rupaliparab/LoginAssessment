@@ -1,0 +1,26 @@
+<div *ngIf="lat && lang">
+  <agm-map [latitude]="lat" [longitude]="lang">
+    <agm-marker [latitude]="lat" [longitude]="lang">
+      <agm-info-window>
+        <h3>test location</h3>
+        <p> You are here</p>
+      </agm-info-window>
+    </agm-marker>
+
+    <agm-marker *ngFor="let marker of markers"
+    [latitude]="marker.location[0]"
+    [longitude]="marker.location[1]"
+    [iconUrl]= " {
+      url:'./assets/marker.png',
+      scaledSize: {
+          width: 40,
+          height: 60
+      }
+  }">
+      <agm-info-window>
+        <h3><strong>Location Details</strong>></h3>
+        <p> You are kilometers from this point</p>
+      </agm-info-window>
+    </agm-marker>
+  </agm-map>
+  </div>

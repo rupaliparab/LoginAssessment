@@ -1,0 +1,31 @@
+<h2>Login</h2>
+        <div *ngIf="!(authenticationService.userData | async)">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="text" formControlName="username"  class="form-control" [(ngModel)]="email" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+
+        <div *ngIf="((f.username.invalid && f.username.touched) || f.username.dirty || submitted )&& !isenableShowMessage">
+          <small *ngIf="f.username.errors?.required" class="text-danger">Username is required</small>
+          <!--question mark(?) is a safe navigation operator-->
+          <small *ngIf="f.username.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+        </div>
+          </div>
+          <div class="form-group" *ngIf="!enableForgotPassword">
+            <label for="pwd">Password:</label>
+            <input type="password" formControlName="password"  [(ngModel)]="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <a  class="btn btn-link float-right" *ngIf="!enableForgotPassword" (click)="sendEmail()">forgot password</a>
+            <div *ngIf="((f.password.invalid && f.password.touched) || f.password.dirty || submitted) && !enableShowMessage">
+                <small *ngIf="f.password.errors?.required" class="text-danger">Password is required</small>
+            </div></div>
+          <div *ngIf="!f.password.errors || !f.username.errors || enableShowMessage" class="text-danger">{{errorMessage}}</div>
+          <!-- <button *ngIf="!enableForgotPassword" (click)="signUp()" class="btn btn-outline-dark">Sign Up</button> -->
+          <button *ngIf="!enableForgotPassword" (click)="signIn()" class="btn btn-outline-dark"
+           >Login</button>
+          <button *ngIf="enableForgotPassword" (click)="forgotPassword(email)" class="btn btn-outline-dark"
+            style="margin-left:5px;">Send Mail</button>
+
+
+        </form>
+    <!-- <app-login *ngIf="!isSignedIn" (isLoggOut)="signOut()"></app-login> -->
+  </div>
