@@ -1,2 +1,5 @@
-<p>You are logged in</p>
-<button (click)="logOut()" routerLink="/" class="btn btn-primary">Logout</button>
+
+      <p>You are logged in</p>
+<P>{{this.userDetails['email']}}</P>
+<div class="float-sm-end"><button (click)="logOut()" routerLink="/" class="btn btn-outline-dark">Logout</button></div>
+

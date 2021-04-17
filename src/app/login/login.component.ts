@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
     private route: Router) { }
 
   ngOnInit() {
-    this.userDetails = JSON.stringify(localStorage.getItem('user'));
+    this.userDetails = JSON.parse(localStorage.getItem('user'));
+    console.log(this.userDetails);
   }
 
   logOut() {

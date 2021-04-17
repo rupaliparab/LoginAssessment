@@ -46,7 +46,6 @@ export class AuthenticationService {
 
   /* Sign out */
   SignOut() {
-    alert('signout servie');
     this.angularFireAuth.signOut();
     localStorage.removeItem('user');
   }
