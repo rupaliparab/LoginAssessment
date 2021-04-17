@@ -29,5 +29,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Extra question
 If you were given more time to improve your solution what would you improve and why?
 
-I  get more time then will add register scenario, some more forgot password stepst to add and evne
+If I get more time then will add register scenario, some more forgot password steps to add and even
 geolocation will add. Some more testing will be required and then some more error will get handles.
