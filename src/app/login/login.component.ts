@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
   isSignedIn = false;
-
+  @Output() isLogout = new EventEmitter<void>();
   constructor(
     private authenticationService: AuthenticationService,
     private route: Router) { }
@@ -21,7 +21,9 @@ export class LoginComponent implements OnInit {
     this.userDetails = JSON.stringify(localStorage.getItem('user'));
   }
 
-  signOut() {
+  logOut() {
+    alert('signout log');
     this.authenticationService.SignOut();
+    this.isLogout.emit();
   }
 }

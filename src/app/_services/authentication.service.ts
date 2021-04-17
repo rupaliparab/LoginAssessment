@@ -9,10 +9,10 @@ import { Observable, Subject } from 'rxjs';
 export class AuthenticationService {
   isLoggedIn = false;
   errorMessage: string ;
-  userData: Observable<firebase.User>;
+ // userData: Observable<firebase.loginassessment>;
 
   constructor(private angularFireAuth: AngularFireAuth) {
-    this.userData = angularFireAuth.authState;
+  //  this.userData = angularFireAuth.authState;
   }
 
   /* Sign up */
@@ -35,7 +35,6 @@ export class AuthenticationService {
   await  this.angularFireAuth.signInWithEmailAndPassword(email, password)
       .then(res => {
         this.isLoggedIn = true;
-        alert('-true-');
         localStorage.setItem('user', JSON.stringify(res.user));
       })
       .catch(error => {
@@ -48,6 +47,7 @@ export class AuthenticationService {
   /* Sign out */
   SignOut() {
     this.angularFireAuth.signOut();
+    localStorage.removeItem('user');
   }
 
   setErrorMessage(val: string ) {

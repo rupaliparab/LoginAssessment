@@ -13,13 +13,16 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HomeComponent } from './home/home.component';
+import { AgmCoreModule } from '@agm/core';
+import { GoogleMapComponent } from './google-map/google-map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    GoogleMapComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,10 @@ import { HomeComponent } from './home/home.component';
     AngularFireModule.initializeApp(environment.firebaseConfig, 'LoginAssessment'),
     AngularFirestoreModule, // Only required for database features
     AngularFireAuthModule, // Only required for auth features,
-    AngularFireStorageModule // Only required for storage features
+    AngularFireStorageModule, // Only required for storage features
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleMapsKey
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

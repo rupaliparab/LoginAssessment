@@ -42,18 +42,17 @@ export class HomeComponent implements OnInit {
     if (this.authenticationService.isLoggedIn) {
       this.isSignedIn = true;
       this.router.navigate(['/login']);
-      alert(this.isSignedIn);
-    } else {
-      // setTimeout(() => {
-      this.showMessage();
-      // }, 100);
-    }
+      } else {
+       this.showMessage();
+      }
     this.email = '';
     this.password = '';
   }
 
   signOut() {
+    alert('signout home');
     this.authenticationService.SignOut();
+    this.isSignedIn = false;
   }
   showMessage() {
     this.errorMessage = this.authenticationService.getErrorMessage();
