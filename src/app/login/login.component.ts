@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AuthenticationService } from '../_services/authentication.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +14,7 @@ export class LoginComponent implements OnInit {
   isSignedIn = false;
   @Output() isLogout = new EventEmitter<void>();
   constructor(
-    private authenticationService: AuthenticationService,
-    private route: Router) { }
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('user'));

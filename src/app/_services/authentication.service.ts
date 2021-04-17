@@ -50,15 +50,14 @@ export class AuthenticationService {
     localStorage.removeItem('user');
   }
 
-  forgottPassword(email) {
+ async forgottPassword(email) {
 
-    this.angularFireAuth.sendPasswordResetEmail(email).then(
+    await this.angularFireAuth.sendPasswordResetEmail(email).then(
       () => {
-        // success, show some message
-        console.log('password reset successfully');
+        this.setErrorMessage('Mail send successfully.');
       },
       err => {
-        console.log('password: ', err);
+        this.setErrorMessage(err.message);
       }
     );
   }

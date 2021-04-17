@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
     this.isSignedIn = false;
   }
 
-  forgotPasswordLink() {
+  sendEmail() {
     this.enableForgotPassword = true;
   }
 
@@ -89,6 +89,9 @@ export class HomeComponent implements OnInit {
 
     this.authenticationService.forgottPassword(email);
     this.enableForgotPassword = false;
+    setTimeout(()=>{
+    this.showMessage();
+  }, 1000);
   }
   showMessage() {
     this.enableShowMessage = true;
