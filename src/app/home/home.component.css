@@ -58,7 +58,10 @@ body {
   }
 }
 
-
+body {
+  background-color: #B3E5FC;
+  border-radius: 10px
+}
 .login-main-text{
   margin-top: 20%;
   padding: 60px;

@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   userDetails: any;
   email: string;
   password: string;
+  imgUrl: string;
   isSignedIn = false;
   @Output() isLogout = new EventEmitter<void>();
   constructor(
@@ -19,11 +20,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('user'));
+    this.imgUrl = this.userDetails.photoURL ? this.userDetails.photURL : '../../assets/profileImage.png';
+    console.log(this.imgUrl);
     console.log(this.userDetails);
   }
 
   logOut() {
-    alert('signout log');
     this.authenticationService.SignOut();
     this.isLogout.emit();
   }
